@@ -1,28 +1,78 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <v-app>
+    <v-navigation-drawer
+      permanent
+      app
+      class="nav"
+    >
+      <v-list dense>
+        <v-list-item to="/accueil">
+          <v-list-item-action>
+            <v-icon>dashboard</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>Accueil</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+        <v-list-item to="/comparator">
+          <v-list-item-action>
+            <v-icon>show_chart</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>Comparateur</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+        <v-list-item to="/ships">
+          <v-list-item-action>
+            <v-icon>flight_takeoff</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>Les vaisseaux</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+        <v-list-item to="/verse">
+          <v-list-item-action>
+            <v-img height="30" width="20" src="./resources/logos/STARCITIZEN_WHITE.png"></v-img>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>Le verse</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </v-list>
+    </v-navigation-drawer>
+
+    <v-content>
+      <v-container
+        fluid
+      >
+        <router-view></router-view>
+      </v-container>
+    </v-content>
+  </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+
+  import Api from './services/api-service'
 
 export default {
-  name: 'app',
+  name: 'App',
+
   components: {
-    HelloWorld
-  }
-}
+
+  },
+  created() {
+    Api.getShip();
+  },
+  data: () => ({
+    drawer : true,
+  }),
+};
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+  .nav {
+    background-image: url("resources/images/background_navigation_2.jpg");
+    background-size: cover;
+  }
 </style>
